@@ -12,15 +12,14 @@ spec:
       securityContext:
         fsGroup: 2000
       containers:
-      - image: sonatype/nexus3
-        imagePullPolicy: Always
-        name: $APP
-        ports:
-        - containerPort: 8081
-        - containerPort: 5000
-        volumeMounts:
-          - mountPath: /nexus-data
-            name: $GCE_DISK
+        - image: sonatype/nexus3
+          imagePullPolicy: Always
+          name: $APP
+          ports:
+            - containerPort: 8081
+          volumeMounts:
+            - mountPath: /nexus-data
+              name: $GCE_DISK
       volumes:
         - name: $GCE_DISK
           persistentVolumeClaim:

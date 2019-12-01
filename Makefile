@@ -9,6 +9,7 @@ include .make/Makefile.inc
 
 NS                  ?= default
 APP                 ?= nexus
+PORT				?= 8081
 GCE_ZONE			?= us-central1-a
 GCE_DISK            ?= nexus-persistent-storage
 GCE_SIZE			?= 100
