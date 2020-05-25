@@ -1,9 +1,12 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: $APP
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: $APP
   template:
     metadata:
       labels:
@@ -19,8 +22,10 @@ spec:
             - containerPort: $PORT
           volumeMounts:
             - mountPath: /nexus-data
-              name: $GCE_DISK
+              name: k8-dev-nexus
       volumes:
-        - name: $GCE_DISK
-          persistentVolumeClaim:
-            claimName: $GCE_DISK
+        - name: k8-dev-nexus
+          azureDisk:
+            kind: Managed
+            diskName: k8-dev-nexus
+            diskURI: /subscriptions/15898331-6d5a-4032-8490-c1608fea8f47/resourceGroups/dev/providers/Microsoft.Compute/disks/k8-dev-nexus
